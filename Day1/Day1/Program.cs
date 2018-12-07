@@ -73,6 +73,11 @@ namespace AdventOfCode
 
             Console.WriteLine($"Result is: {result}");
             Console.ReadKey();
+
+            var resultLetters = Checksumeitor.GetCommonLetters(boxes);
+
+            Console.WriteLine($"Result second part is: {resultLetters}");
+            Console.ReadKey();
         }
 
         private static IEnumerable<string> ReadFile(string filePath)

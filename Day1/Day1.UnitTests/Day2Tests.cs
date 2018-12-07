@@ -35,5 +35,41 @@ namespace AdventOfCode.UnitTests
             var box = "bababc";
             Assert.True(Checksumeitor.HasThreeRepetitions(box));
         }
+
+        [Fact]
+        public void Test4()
+        {
+            var boxes = new List<string>()
+            {
+                "abcde",
+                "fghij",
+                "klmno",
+                "pqrst",
+                "fguij",
+                "axcye",
+                "wvxyz",
+            };
+
+            Assert.True("fgij" == Checksumeitor.GetCommonLetters(boxes));
+        }
+
+        [Fact]
+        public void Test5()
+        {
+            Assert.True(Checksumeitor.AreEqualByOneChar("fghij", "fguij"));
+        }
+
+
+        [Fact]
+        public void Test6()
+        {
+            Assert.False(Checksumeitor.AreEqualByOneChar("abcde", "fghij"));
+        }
+
+        [Fact]
+        public void Test7()
+        {
+            Assert.True("fgij" == Checksumeitor.GetEqualChars("fghij", "fguij"));
+        }
     }
 }
