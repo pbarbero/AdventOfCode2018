@@ -16,6 +16,12 @@ namespace Day1
             Console.WriteLine($"Result is: {result}");
             Console.WriteLine("...");
             Console.ReadKey();
+
+            var resultTwice = Frequenceitor.GetFrequencyReachesTwice(frequencies);
+
+            Console.WriteLine($"Result device reaches twice is: {resultTwice}");
+            Console.WriteLine("...");
+            Console.ReadKey();
         }
 
         private static List<int> ReadFile()

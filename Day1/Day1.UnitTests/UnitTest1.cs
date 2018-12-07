@@ -29,9 +29,46 @@ namespace Day1.UnitTests
             Assert.True(-6 == GetResultingFrequency(frequencyChanges));
         }
 
+        [Fact]
+        public void Test4()
+        {
+            var frequencyChanges = new List<int>() { 1, -1 };
+
+            Assert.True(0 == GetFrequencyReachesTwice(frequencyChanges));
+        }
+
+        [Fact]
+        public void Test5()
+        {
+            var frequencyChanges = new List<int>() { +3, +3, +4, -2, -4 };
+
+            Assert.True(10 == GetFrequencyReachesTwice(frequencyChanges));
+        }
+
+        [Fact]
+        public void Test6()
+        {
+            var frequencyChanges = new List<int>() { -6, +3, +8, +5, -6 };
+
+            Assert.True(5 == GetFrequencyReachesTwice(frequencyChanges));
+        }
+
+        [Fact]
+        public void Test7()
+        {
+            var frequencyChanges = new List<int>() { +7, +7, -2, -7, -4 };
+
+            Assert.True(14 == GetFrequencyReachesTwice(frequencyChanges));
+        }
+
         private int GetResultingFrequency(List<int> frequencyChanges)
         {
             return Frequenceitor.GetResultingFrequency(frequencyChanges);
+        }
+
+        private int GetFrequencyReachesTwice(List<int> frequencyChanges)
+        {
+            return Frequenceitor.GetFrequencyReachesTwice(frequencyChanges);
         }
     }
 }
