@@ -9,26 +9,38 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-            var frequencies = ReadFile();
 
-            var result = Frequenceitor.GetResultingFrequency(frequencies);
+            Console.WriteLine($"Write day to execute..");
+            var day = Console.ReadLine();
 
-            Console.WriteLine($"Result is: {result}");
-            Console.WriteLine("...");
-            Console.ReadKey();
+            var correctDay = true;
 
-            var resultTwice = Frequenceitor.GetFrequencyReachesTwice(frequencies);
+            while (correctDay)
+            {
+                switch (day)
+                {
+                    case "1":
+                        correctDay = false;
+                        Day1();
+                        break;
+                    case "2":
+                        correctDay = false;
+                        Day2();
+                        break;
+                    default:
+                        Console.WriteLine($"Fuck u, insert me a correct day");
+                        day = Console.ReadLine();
+                        break;
+                };
+            }
 
-            Console.WriteLine($"Result device reaches twice is: {resultTwice}");
-            Console.WriteLine("...");
-            Console.ReadKey();
+            
         }
 
-        private static List<int> ReadFile()
+        private static void Day1()
         {
             var frequencies = new List<int>();
-            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"../../../input.txt"); ;
-            var lines = File.ReadLines(path);
+            var lines = ReadFile(@"../../../input1.txt");
 
             foreach (var line in lines)
             {
@@ -36,7 +48,39 @@ namespace AdventOfCode
                 frequencies.Add(frequency);
             }
 
-            return frequencies;
+            var result = Frequenceitor.GetResultingFrequency(frequencies);
+
+            Console.WriteLine($"Result is: {result}");
+            Console.ReadKey();
+
+            var resultTwice = Frequenceitor.GetFrequencyReachesTwice(frequencies);
+
+            Console.WriteLine($"Result device reaches twice is: {resultTwice}");
+            Console.ReadKey();
+        }
+
+        private static void Day2()
+        {
+            var boxes = new List<string>();
+            var lines = ReadFile(@"../../../input2.txt");
+
+            foreach (var line in lines)
+            {
+                boxes.Add(line.Trim());
+            }
+
+            var result = Checksumeitor.GetChecksum(boxes);
+
+            Console.WriteLine($"Result is: {result}");
+            Console.ReadKey();
+        }
+
+        private static IEnumerable<string> ReadFile(string filePath)
+        {
+            var frequencies = new List<int>();
+            var path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), filePath);
+
+            return File.ReadLines(path);
         }
     }
 }
