@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using Xunit;
 
-namespace Day1.UnitTests
+namespace AdventOfCode.UnitTests
 {
-    public class UnitTest1
+    public class Day1Tests
     {
         [Fact]
         public void Test1()

@@ -13,13 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Day1\Day1.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="GameOfLife.Library">
-      <HintPath>..\..\..\GameOfLife\GameOfLife.Library\bin\Debug\netcoreapp2.1\GameOfLife.Library.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Day1\AdventOfCode.csproj" />
   </ItemGroup>
 
 </Project>

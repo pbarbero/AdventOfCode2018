@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Day1
+namespace AdventOfCode
 {
     public static class Frequenceitor
     {
