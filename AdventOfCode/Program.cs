@@ -10,7 +10,6 @@ namespace AdventOfCode
     {
         static void Main(string[] args)
         {
-
             Console.WriteLine($"Write day to execute..");
             var day = Console.ReadLine();
 
@@ -100,6 +99,7 @@ namespace AdventOfCode
                 claims.Add(
                     new Claim()
                     {
+                        Id = atSplit[0].Trim(),
                         MarginLeft = Int32.Parse(margins[0]),
                         MarginTop = Int32.Parse(margins[1]),
                         Width = Int32.Parse(sizes[0]),
@@ -111,6 +111,10 @@ namespace AdventOfCode
             var result = Claimeitor.GetNumberOverlappedClaims(claims);
 
             Console.WriteLine($"Result is: {result}");
+
+            var result2 = Claimeitor.GetIsolatedClaim(claims);
+
+            Console.WriteLine($"Result second part is: {result2}");
             Console.ReadKey();
         }
 

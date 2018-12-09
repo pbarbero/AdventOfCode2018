@@ -9,10 +9,27 @@ namespace AdventOfCode.UnitTests
         [Fact]
         public void Test1()
         {
-            var claims = new List<Claim>()
+            var claims = BuildClaims();
+            var inches = Claimeitor.GetNumberOverlappedClaims(claims);
+            Assert.True(4 == inches);
+        }
+
+        [Fact]
+        public void Test2()
+        {
+            var claims = BuildClaims();
+            var id = Claimeitor.GetIsolatedClaim(claims);
+
+            Assert.True("3" == id);
+        }
+
+        private List<Claim> BuildClaims()
+        {
+            return new List<Claim>()
             {
                 new Claim()
                 {
+                    Id = "1",
                     MarginLeft = 1,
                     MarginTop = 3,
                     Width = 4,
@@ -20,6 +37,7 @@ namespace AdventOfCode.UnitTests
                 },
                 new Claim()
                 {
+                    Id = "2",
                     MarginLeft = 3,
                     MarginTop = 1,
                     Width = 4,
@@ -27,6 +45,7 @@ namespace AdventOfCode.UnitTests
                 },
                 new Claim()
                 {
+                    Id = "3",
                     MarginLeft = 5,
                     MarginTop = 5,
                     Width = 2,
@@ -34,8 +53,6 @@ namespace AdventOfCode.UnitTests
                 }
             };
 
-            var inches = Claimeitor.GetNumberOverlappedClaims(claims);
-            Assert.True(4 == inches);
         }
     }
 }
