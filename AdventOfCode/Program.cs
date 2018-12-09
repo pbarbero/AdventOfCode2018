@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
+using AdventOfCode.Utils;
 
 namespace AdventOfCode
 {
@@ -27,6 +28,10 @@ namespace AdventOfCode
                         correctDay = false;
                         Day2();
                         break;
+                    case "3":
+                        correctDay = false;
+                        Day3();
+                        break;
                     default:
                         Console.WriteLine($"Fuck u, insert me a correct day");
                         day = Console.ReadLine();
@@ -34,7 +39,7 @@ namespace AdventOfCode
                 };
             }
 
-            
+
         }
 
         private static void Day1()
@@ -77,6 +82,35 @@ namespace AdventOfCode
             var resultLetters = Checksumeitor.GetCommonLetters(boxes);
 
             Console.WriteLine($"Result second part is: {resultLetters}");
+            Console.ReadKey();
+        }
+
+        private static void Day3()
+        {
+            var claims = new List<Claim>();
+            var lines = ReadFile(@"../../../input3.txt");
+
+            foreach (var line in lines)
+            {
+                var atSplit = line.Split('@');
+                var marginSizeSplit = atSplit[1].Split(':');
+                var margins = marginSizeSplit[0].Trim().Split(',');
+                var sizes = marginSizeSplit[1].Trim().Split('x');
+
+                claims.Add(
+                    new Claim()
+                    {
+                        MarginLeft = Int32.Parse(margins[0]),
+                        MarginTop = Int32.Parse(margins[1]),
+                        Width = Int32.Parse(sizes[0]),
+                        Height = Int32.Parse(sizes[1]),
+                    }
+                );
+            }
+
+            var result = Claimeitor.GetNumberOverlappedClaims(claims);
+
+            Console.WriteLine($"Result is: {result}");
             Console.ReadKey();
         }
 
