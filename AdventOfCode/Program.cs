@@ -31,6 +31,10 @@ namespace AdventOfCode
                         correctDay = false;
                         Day3();
                         break;
+                    case "4":
+                        correctDay = false;
+                        Day4();
+                        break;
                     default:
                         Console.WriteLine($"Fuck u, insert me a correct day");
                         day = Console.ReadLine();
@@ -116,6 +120,22 @@ namespace AdventOfCode
 
             Console.WriteLine($"Result second part is: {result2}");
             Console.ReadKey();
+        }
+
+        private static void Day4()
+        {
+            var claims = new List<Claim>();
+            var lines = ReadFile(@"../../../input4.txt");
+
+            foreach (var line in lines)
+            {
+            }
+
+            var idGuard = Asleepeitor.GetIdGuardMostAsleep();
+            var minute = Asleepeitor.GetMinuteMostAsleep(idGuard);
+            var result = int.Parse(idGuard) * minute;
+
+            Console.WriteLine($"Result is: {result}");
         }
 
         private static IEnumerable<string> ReadFile(string filePath)
