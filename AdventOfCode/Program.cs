@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using AdventOfCode.Utils;
 
@@ -70,7 +71,7 @@ namespace AdventOfCode
         private static void Day2()
         {
             var boxes = new List<string>();
-            var lines = ReadFile(@"../../../input2.txt");
+            var lines = ReadFile(@"../../../Data/input2.txt");
 
             foreach (var line in lines)
             {
@@ -91,7 +92,7 @@ namespace AdventOfCode
         private static void Day3()
         {
             var claims = new List<Claim>();
-            var lines = ReadFile(@"../../../input3.txt");
+            var lines = ReadFile(@"../../../Data/input3.txt");
 
             foreach (var line in lines)
             {
@@ -104,10 +105,10 @@ namespace AdventOfCode
                     new Claim()
                     {
                         Id = atSplit[0].Trim(),
-                        MarginLeft = Int32.Parse(margins[0]),
-                        MarginTop = Int32.Parse(margins[1]),
-                        Width = Int32.Parse(sizes[0]),
-                        Height = Int32.Parse(sizes[1]),
+                        MarginLeft = int.Parse(margins[0]),
+                        MarginTop = int.Parse(margins[1]),
+                        Width = int.Parse(sizes[0]),
+                        Height = int.Parse(sizes[1]),
                     }
                 );
             }
@@ -124,18 +125,15 @@ namespace AdventOfCode
 
         private static void Day4()
         {
-            var claims = new List<Claim>();
-            var lines = ReadFile(@"../../../input4.txt");
+            var claims = new List<Tuple<DateTime, string>>();
+            var lines = ReadFile(@"../../../Data/input4.txt");
 
-            foreach (var line in lines)
-            {
-            }
-
-            var idGuard = Asleepeitor.GetIdGuardMostAsleep();
-            var minute = Asleepeitor.GetMinuteMostAsleep(idGuard);
+            var idGuard = Asleepeitor.GetIdGuardMostAsleep(lines.ToList());
+            var minute = Asleepeitor.GetMinuteMostAsleep("#" + idGuard);
             var result = int.Parse(idGuard) * minute;
 
             Console.WriteLine($"Result is: {result}");
+            Console.ReadKey();
         }
 
         private static IEnumerable<string> ReadFile(string filePath)
