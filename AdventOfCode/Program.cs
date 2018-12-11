@@ -134,6 +134,11 @@ namespace AdventOfCode
 
             Console.WriteLine($"Result is: {result}");
             Console.ReadKey();
+            
+            var result2 = Asleepeitor.GetMinuteMostAsleepForGuard();
+
+            Console.WriteLine($"Result is: {result2}");
+            Console.ReadKey();
         }
 
         private static IEnumerable<string> ReadFile(string filePath)

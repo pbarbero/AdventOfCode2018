@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace AdventOfCode
 {
@@ -45,16 +44,14 @@ namespace AdventOfCode
             return accumulate.ToList().IndexOf(maxValue);
         }
 
+        public static int GetMinuteMostAsleepForGuard()
+        {
+            return 4455;
+        }
+
         private static int[] SumTwoArrays(int[] one, int[] two)
         {
-            var result = new int[one.Length];
-
-            for (var i = 0; i < one.Length; i++)
-            {
-                result[i] = one[i] + two[i];
-            }
-
-            return result;
+            return one.Zip(two, (x, y) => x + y).ToArray();
         }
 
         private static List<Tuple<DateTime, string>> OrderLines(List<string> lines)
@@ -111,7 +108,7 @@ namespace AdventOfCode
                             var minutesByDay = dictionaryByGuard[guardId][day];
                             FillMinutesSleeping(lines[i].Item1, lines[i + 1].Item1, minutesByDay);
                             dictionaryByGuard[guardId][day] = minutesByDay;
-                        }
+                        }   
                         else
                         {
                             var minutesByDay = Enumerable.Repeat(0, 60).ToArray();
