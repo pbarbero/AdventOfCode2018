@@ -46,7 +46,30 @@ namespace AdventOfCode
 
         public static int GetMinuteMostAsleepForGuard()
         {
-            return 4455;
+            var foo = 0;
+            var guardId = string.Empty;
+            var result = 0;
+
+            foreach (var guard in data.Keys)
+            {
+                var accumulated = new int[60];
+                var daysForGuard = data[guard];
+
+                foreach (var day in daysForGuard)
+                {
+                    accumulated = SumTwoArrays(accumulated, day.Value);
+                }
+
+                var max = accumulated.Max();
+                if (foo < max)
+                {
+                    foo = max;
+                    result = accumulated.ToList().IndexOf(max);
+                    guardId = guard;
+                }
+            }
+
+            return Convert.ToInt32(guardId.Substring(1, guardId.Length - 1)) * result;
         }
 
         private static int[] SumTwoArrays(int[] one, int[] two)
