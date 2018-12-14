@@ -36,6 +36,10 @@ namespace AdventOfCode
                         correctDay = false;
                         Day4();
                         break;
+                    case "5":
+                        correctDay = false;
+                        Day5();
+                        break;
                     default:
                         Console.WriteLine($"Fuck u, insert me a correct day");
                         day = Console.ReadLine();
@@ -138,6 +142,17 @@ namespace AdventOfCode
             var result2 = Asleepeitor.GetMinuteMostAsleepForGuard();
 
             Console.WriteLine($"Result is: {result2}");
+            Console.ReadKey();
+        }
+
+        private static void Day5()
+        {
+            var claims = new List<Tuple<DateTime, string>>();
+            var lines = ReadFile(@"../../../Data/input5.txt");
+
+            var result = Polarizeitor.Scan(lines.First());
+
+            Console.WriteLine($"Result is: {result}");
             Console.ReadKey();
         }
 
