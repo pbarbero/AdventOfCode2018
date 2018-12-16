@@ -153,6 +153,10 @@ namespace AdventOfCode
             var result = Polarizeitor.Scan(lines.First());
 
             Console.WriteLine($"Result is: {result}");
+            
+            var result2 = Polarizeitor.BestScan(lines.First());
+
+            Console.WriteLine($"Result is: {result2}");
             Console.ReadKey();
         }
 

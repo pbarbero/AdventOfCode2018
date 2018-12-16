@@ -1,4 +1,6 @@
-﻿namespace AdventOfCode
+﻿using System.Linq;
+
+namespace AdventOfCode
 {
     public static class Polarizeitor
     {
@@ -8,7 +10,7 @@
 
             while (continueProcess)
             {
-                var indexToRemove = RecursiveScan(polymer);
+                var indexToRemove = React(polymer);
                 continueProcess = indexToRemove != -1;
 
                 if (continueProcess)
@@ -21,6 +23,25 @@
             return polymer.Length;
         }
 
+        public static int BestScan(string polymer)
+        {
+            var distinctLetters = polymer.ToLower().ToList().Distinct();   
+            var minimum = polymer.Length;
+
+            foreach(var letter in distinctLetters)
+            {
+                var polymerWithoutLetter = RemoveLetter(polymer, letter);
+                var length = Scan(polymerWithoutLetter);
+
+                if(minimum > length)
+                {
+                    minimum = length;
+                }
+            }
+
+            return minimum;
+        }
+
         public static bool Polarize(char unit0, char unit1)
         {
             return unit0.ToString().ToUpper() == unit1.ToString().ToUpper()
@@ -28,7 +49,15 @@
               || (char.IsLower(unit1) && char.IsUpper(unit0)));
         }
 
-        private static int RecursiveScan(string polymer)
+        public static string RemoveLetter(string polymer, char letter)
+        {
+            var upperLetter = char.ToUpper(letter);
+            var lowerLetter = char.ToLower(letter);
+            
+            return new string(polymer.Where(c => c != upperLetter && c != lowerLetter).ToArray());
+        }
+
+        private static int React(string polymer)
         {
             for (int i = 0; i < polymer.Length - 1; i++)
             {

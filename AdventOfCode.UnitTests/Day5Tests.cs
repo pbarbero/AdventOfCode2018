@@ -30,5 +30,19 @@ namespace AdventOfCode.UnitTests
             var result = Polarizeitor.Scan("ABCDRDFfdrdcba");
             Assert.True(0 == result);            
         }
+
+        [Fact]
+        public void Test5()
+        {
+            var result = Polarizeitor.BestScan("dabAcCaCBAcCcaDA");
+            Assert.True(4 == result);
+        }
+
+        [Fact]
+        public void Test6()
+        {
+            var result = Polarizeitor.RemoveLetter("dabAcCaCBAcCcaDA", 'a');
+            Assert.True("dbcCCBcCcD" == result);
+        }
     }
 }
