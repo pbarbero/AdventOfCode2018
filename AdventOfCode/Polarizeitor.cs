@@ -23,7 +23,9 @@
 
         public static bool Polarize(char unit0, char unit1)
         {
-            return unit0.ToString().ToUpper() == unit1.ToString().ToUpper();
+            return unit0.ToString().ToUpper() == unit1.ToString().ToUpper()
+            && ( (char.IsLower(unit0) && char.IsUpper(unit1) )
+              || (char.IsLower(unit1) && char.IsUpper(unit0)));
         }
 
         private static int RecursiveScan(string polymer)

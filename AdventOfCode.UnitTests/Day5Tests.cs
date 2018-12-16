@@ -23,5 +23,12 @@ namespace AdventOfCode.UnitTests
         {
             Assert.False(Polarizeitor.Polarize('a', 'r'));
         }
+
+        [Fact]
+        public void Test4()
+        {
+            var result = Polarizeitor.Scan("ABCDRDFfdrdcba");
+            Assert.True(0 == result);            
+        }
     }
 }
