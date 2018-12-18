@@ -40,6 +40,10 @@ namespace AdventOfCode
                         correctDay = false;
                         Day5();
                         break;
+                    case "6":
+                        correctDay = false;
+                        Day6();
+                        break;
                     default:
                         Console.WriteLine($"Fuck u, insert me a correct day");
                         day = Console.ReadLine();
@@ -147,7 +151,6 @@ namespace AdventOfCode
 
         private static void Day5()
         {
-            var claims = new List<Tuple<DateTime, string>>();
             var lines = ReadFile(@"../../../Data/input5.txt");
 
             var result = Polarizeitor.Scan(lines.First());
@@ -157,6 +160,16 @@ namespace AdventOfCode
             var result2 = Polarizeitor.BestScan(lines.First());
 
             Console.WriteLine($"Result is: {result2}");
+            Console.ReadKey();
+        }
+
+        private static void Day6()
+        {
+            var lines = ReadFile(@"../../../Data/input6.txt");
+
+            var result = Coordinator.GetLargestArea(lines.ToList());
+
+            Console.WriteLine($"Result is: {result}");
             Console.ReadKey();
         }
 
