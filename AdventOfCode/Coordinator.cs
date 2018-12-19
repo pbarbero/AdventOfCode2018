@@ -96,13 +96,11 @@ namespace AdventOfCode
         private static List<string> SelectCentralCoordinates(List<Tuple<int, int, string>> mainCoordinates)
         {
             var centrals = new List<string>();
-            var Xs = mainCoordinates.Select(x => x.Item1);
-            var Ys = mainCoordinates.Select(x => x.Item2);
 
             foreach (var coordinate in mainCoordinates)
             {
-                var isCentral = Xs.Any(x => x < coordinate.Item1) && Xs.Any(x => x > coordinate.Item1)
-                             && Ys.Any(y => y < coordinate.Item2) && Ys.Any(y => y > coordinate.Item2);
+                var isCentral = mainCoordinates.Any(mainCoordinate => IsLessThan(coordinate, mainCoordinate))
+                             && mainCoordinates.Any(mainCoordinate => IsBiggerThan(coordinate, mainCoordinate));
 
                 if (isCentral)
                 {
@@ -111,6 +109,16 @@ namespace AdventOfCode
             }
 
             return centrals;
+        }
+
+        private static bool IsLessThan(Tuple<int, int, string> coordinate1, Tuple<int, int, string> mainCoordinate)
+        {
+            return coordinate1.Item1 < mainCoordinate.Item1 && coordinate1.Item2 < mainCoordinate.Item2;
+        }
+
+        private static bool IsBiggerThan(Tuple<int, int, string> coordinate1, Tuple<int, int, string> mainCoordinate)
+        {
+            return coordinate1.Item1 > mainCoordinate.Item1 && coordinate1.Item2 > mainCoordinate.Item2;
         }
     }
 }
