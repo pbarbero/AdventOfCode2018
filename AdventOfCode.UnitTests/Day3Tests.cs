@@ -7,6 +7,7 @@ namespace AdventOfCode.UnitTests
     public class Day3Tests
     {
         [Fact]
+        [Trait("Category", "Day3")]
         public void Test1()
         {
             var claims = BuildClaims();
@@ -15,6 +16,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day3")]
         public void Test2()
         {
             var claims = BuildClaims();

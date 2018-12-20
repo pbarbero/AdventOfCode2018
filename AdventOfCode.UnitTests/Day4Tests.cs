@@ -6,6 +6,7 @@ namespace AdventOfCode.UnitTests
     public class Day4Tests
     {
         [Fact]
+        [Trait("Category", "Day4")]
         public void Test1()
         {
             var lines = BuildLines();

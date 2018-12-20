@@ -7,6 +7,7 @@ namespace AdventOfCode.UnitTests
     public class Day6Tests
     {
         [Fact]
+        [Trait("Category", "Day6")]
         public void Test1()
         {
             var coordinates = BuildCoordinates();
@@ -15,6 +16,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day6")]
         public void Test2()
         {
             var result = Coordinator.GetTaxicabDistance(2, 1, 2, 0);
@@ -22,6 +24,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day6")]
         public void Test3()
         {
             var mainCoordinates = BuildMainCoordinates();
@@ -31,6 +34,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day6")]
         public void Test4()
         {
             var coordinates = BuildCoordinates();
@@ -38,6 +42,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day6")]
         public void Test5()
         {
             var mainCoordinates = BuildMainCoordinatesSecondPart();
@@ -45,6 +50,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day6")]
         public void Test6()
         {
             var mainCoordinates = BuildMainCoordinatesSecondPart();

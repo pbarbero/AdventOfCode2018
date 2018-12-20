@@ -6,6 +6,7 @@ namespace AdventOfCode.UnitTests
     public class Day2Tests
     {
         [Fact]
+        [Trait("Category", "Day2")]
         public void Test1()
         {
             var boxes = new List<string>()
@@ -23,6 +24,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day2")]
         public void Test2()
         {
             var box = "bababc";
@@ -30,6 +32,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day2")]
         public void Test3()
         {
             var box = "bababc";
@@ -37,6 +40,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day2")]
         public void Test4()
         {
             var boxes = new List<string>()
@@ -54,6 +58,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day2")]
         public void Test5()
         {
             Assert.True(Checksumeitor.AreEqualByOneChar("fghij", "fguij"));
@@ -61,12 +66,14 @@ namespace AdventOfCode.UnitTests
 
 
         [Fact]
+        [Trait("Category", "Day2")]
         public void Test6()
         {
             Assert.False(Checksumeitor.AreEqualByOneChar("abcde", "fghij"));
         }
 
         [Fact]
+        [Trait("Category", "Day2")]
         public void Test7()
         {
             Assert.True("fgij" == Checksumeitor.GetEqualChars("fghij", "fguij"));

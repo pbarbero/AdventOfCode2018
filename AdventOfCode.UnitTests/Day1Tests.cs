@@ -6,6 +6,7 @@ namespace AdventOfCode.UnitTests
     public class Day1Tests
     {
         [Fact]
+        [Trait("Category", "Day1")]
         public void Test1()
         {
             var frequencyChanges = new List<int>() { 1, 1, 1 };
@@ -14,6 +15,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day1")]
         public void Test2()
         {
             var frequencyChanges = new List<int>() { 1, 1, -2 };
@@ -22,6 +24,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day1")]
         public void Test3()
         {
             var frequencyChanges = new List<int>() { -1, -2, -3 };
@@ -30,6 +33,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day1")]
         public void Test4()
         {
             var frequencyChanges = new List<int>() { 1, -1 };
@@ -38,6 +42,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day1")]
         public void Test5()
         {
             var frequencyChanges = new List<int>() { +3, +3, +4, -2, -4 };
@@ -46,6 +51,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day1")]
         public void Test6()
         {
             var frequencyChanges = new List<int>() { -6, +3, +8, +5, -6 };
@@ -54,6 +60,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day1")]
         public void Test7()
         {
             var frequencyChanges = new List<int>() { +7, +7, -2, -7, -4 };

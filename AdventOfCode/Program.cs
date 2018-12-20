@@ -44,6 +44,10 @@ namespace AdventOfCode
                         correctDay = false;
                         Day6();
                         break;
+                    case "7":
+                        correctDay = false;
+                        Day7();
+                        break;
                     default:
                         Console.WriteLine($"Fuck u, insert me a correct day");
                         day = Console.ReadLine();
@@ -176,6 +180,21 @@ namespace AdventOfCode
 
             Console.WriteLine($"Result part two is: {result2}");
             Console.ReadKey();
+        }
+
+        private static void Day7()
+        {
+            var lines = ReadFile(@"../../../Data/input7.txt");
+
+            var result = Sleightor.GetOrderToBuildSleight(lines.ToList());
+
+            Console.WriteLine($"Result is: {result}");
+            Console.ReadKey();
+
+            //var result2 = Coordinator.GetSizeOfAreaClosestToAllCoordinates(lines.ToList(), 10000);
+
+            //Console.WriteLine($"Result part two is: {result2}");
+            //Console.ReadKey();
         }
 
         private static IEnumerable<string> ReadFile(string filePath)

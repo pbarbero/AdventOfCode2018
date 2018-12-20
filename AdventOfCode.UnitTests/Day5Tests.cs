@@ -5,6 +5,7 @@ namespace AdventOfCode.UnitTests
     public class Day5Tests
     {
         [Fact]
+        [Trait("Category", "Day5")]
         public void Test1()
         {
             var result = Polarizeitor.Scan("dabAcCaCBAcCcaDA");
@@ -12,6 +13,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day5")]
         public void Test2()
         {
             Assert.True(Polarizeitor.Polarize('a', 'A'));
@@ -19,12 +21,14 @@ namespace AdventOfCode.UnitTests
 
 
         [Fact]
+        [Trait("Category", "Day5")]
         public void Test3()
         {
             Assert.False(Polarizeitor.Polarize('a', 'r'));
         }
 
         [Fact]
+        [Trait("Category", "Day5")]
         public void Test4()
         {
             var result = Polarizeitor.Scan("ABCDRDFfdrdcba");
@@ -32,6 +36,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day5")]
         public void Test5()
         {
             var result = Polarizeitor.BestScan("dabAcCaCBAcCcaDA");
@@ -39,6 +44,7 @@ namespace AdventOfCode.UnitTests
         }
 
         [Fact]
+        [Trait("Category", "Day5")]
         public void Test6()
         {
             var result = Polarizeitor.RemoveLetter("dabAcCaCBAcCcaDA", 'a');
