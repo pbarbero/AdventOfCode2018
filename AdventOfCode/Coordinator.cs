@@ -9,9 +9,9 @@ namespace AdventOfCode
         public static int GetLargestArea(List<string> coordinates)
         {
             var mainCoordinates = ParseData(coordinates);
-            var dictionary = BuildDictionary(mainCoordinates);
-            var centrals = SelectCentralCoordinates(mainCoordinates);
-            return dictionary.Where(x => centrals.Contains(x.Key)).Select(x => x.Value.Count()).Max();
+            var grid = BuildGrid(mainCoordinates);
+            var centralKeys = SelectCentralCoordinates(grid);
+            return grid.Where(x => centralKeys.Contains(x.Key)).Select(x => x.Value.Count()).Max();
         }
 
         public static string GetClosestCoordinate(Tuple<int, int> coordinate, List<Tuple<int, int, string>> mainCoordinates)
@@ -65,27 +65,24 @@ namespace AdventOfCode
             return coordinates;
         }
 
-        private static Dictionary<string, List<Tuple<int, int>>> BuildDictionary(List<Tuple<int, int, string>> mainCoordinates)
+        private static Dictionary<string, List<Tuple<int, int>>> BuildGrid(List<Tuple<int, int, string>> mainCoordinates)
         {
             var dictionary = new Dictionary<string, List<Tuple<int, int>>>();
 
-            for (int j = 0; j < mainCoordinates.Select(x => x.Item2).Max(); j++)
+            for (int j = 0; j <= mainCoordinates.Select(x => x.Item2).Max(); j++)
             {
-                for (int i = 0; i < mainCoordinates.Select(x => x.Item1).Max(); i++)
+                for (int i = 0; i <= mainCoordinates.Select(x => x.Item1).Max(); i++)
                 {
                     var coordinate = new Tuple<int, int>(i, j);
                     var closestCoordinate = GetClosestCoordinate(coordinate, mainCoordinates);
 
-                    if (!string.IsNullOrEmpty(closestCoordinate))
+                    if (dictionary.ContainsKey(closestCoordinate))
                     {
-                        if (dictionary.ContainsKey(closestCoordinate))
-                        {
-                            dictionary[closestCoordinate].Add(coordinate);
-                        }
-                        else
-                        {
-                            dictionary.Add(closestCoordinate, new List<Tuple<int, int>>() { coordinate });
-                        }
+                        dictionary[closestCoordinate].Add(coordinate);
+                    }
+                    else
+                    {
+                        dictionary.Add(closestCoordinate, new List<Tuple<int, int>>() { coordinate });
                     }
                 }
             }
@@ -93,32 +90,60 @@ namespace AdventOfCode
             return dictionary;
         }
 
-        private static List<string> SelectCentralCoordinates(List<Tuple<int, int, string>> mainCoordinates)
+        private static List<string> SelectCentralCoordinates(Dictionary<string, List<Tuple<int, int>>> grid)
         {
-            var centrals = new List<string>();
+            var centrals = new List<string>() { string.Empty };
 
-            foreach (var coordinate in mainCoordinates)
+            foreach (var key in grid.Keys)
             {
-                var isCentral = mainCoordinates.Any(mainCoordinate => IsLessThan(coordinate, mainCoordinate))
-                             && mainCoordinates.Any(mainCoordinate => IsBiggerThan(coordinate, mainCoordinate));
-
-                if (isCentral)
+                if (!string.IsNullOrEmpty(key))
                 {
-                    centrals.Add(coordinate.Item3);
+                    var pointsForArea = grid[key];
+                    var hasPointsInRight = IsSurroundedOnTheRight(pointsForArea, grid);
+                    var hasPointsInLeft = IsSurroundedOnTheLeft(pointsForArea, grid);
+                    var hasPointsInTop = IsSurroundedOnTheTop(pointsForArea, grid);
+                    var hastPointsInBottom = IsSurroundedOnTheBottom(pointsForArea, grid);
+
+                    if (hasPointsInRight && hasPointsInLeft && hasPointsInTop && hastPointsInBottom)
+                    {
+                        centrals.Add(key);
+                    }
                 }
             }
 
             return centrals;
         }
 
-        private static bool IsLessThan(Tuple<int, int, string> coordinate1, Tuple<int, int, string> mainCoordinate)
+        private static bool IsSurroundedOnTheRight(List<Tuple<int, int>> pointsInArea, Dictionary<string, List<Tuple<int, int>>> grid)
         {
-            return coordinate1.Item1 < mainCoordinate.Item1 && coordinate1.Item2 < mainCoordinate.Item2;
+            var maxX = pointsInArea.Select(x => x.Item1).Max();
+            var pointsInTheRight = pointsInArea.Where(x => x.Item1 == maxX);
+
+            return pointsInTheRight.All(x => grid.Any(area => area.Value.Select(y => y.Item1).Any(z => z > x.Item1)));
         }
 
-        private static bool IsBiggerThan(Tuple<int, int, string> coordinate1, Tuple<int, int, string> mainCoordinate)
+        private static bool IsSurroundedOnTheLeft(List<Tuple<int, int>> pointsInArea, Dictionary<string, List<Tuple<int, int>>> grid)
         {
-            return coordinate1.Item1 > mainCoordinate.Item1 && coordinate1.Item2 > mainCoordinate.Item2;
+            var minX = pointsInArea.Select(x => x.Item1).Min();
+            var pointsInTheLeft = pointsInArea.Where(x => x.Item1 == minX);
+
+            return pointsInTheLeft.All(x => grid.Any(area => area.Value.Select(y => y.Item1).Any(z => z < x.Item1)));
+        }
+
+        private static bool IsSurroundedOnTheTop(List<Tuple<int, int>> pointsInArea, Dictionary<string, List<Tuple<int, int>>> grid)
+        {
+            var minY = pointsInArea.Select(x => x.Item2).Min();
+            var pointsInTheTop = pointsInArea.Where(x => x.Item2 == minY);
+
+            return pointsInTheTop.All(x => grid.Any(area => area.Value.Select(y => y.Item2).Any(z => z < x.Item2)));
+        }
+
+        private static bool IsSurroundedOnTheBottom(List<Tuple<int, int>> pointsInArea, Dictionary<string, List<Tuple<int, int>>> grid)
+        {
+            var maxY = pointsInArea.Select(x => x.Item2).Max();
+            var pointsInTheBottom = pointsInArea.Where(x => x.Item2 == maxY);
+
+            return pointsInTheBottom.All(x => grid.Any(area => area.Value.Select(y => y.Item2).Any(z => z > x.Item2)));
         }
     }
 }
