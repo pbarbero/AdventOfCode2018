@@ -14,6 +14,34 @@ namespace AdventOfCode
             return grid.Where(x => centralKeys.Contains(x.Key)).Select(x => x.Value.Count()).Max();
         }
 
+        public static int GetSizeOfAreaClosestToAllCoordinates(List<string> coordinates, int threshold)
+        {
+            var mainCoordinates = ParseData(coordinates);
+            var areaLength = 0;
+
+            for (int j = 0; j <= mainCoordinates.Select(x => x.Item2).Max(); j++)
+            {
+                for (int i = 0; i <= mainCoordinates.Select(x => x.Item1).Max(); i++)
+                {
+                    areaLength = IsInArea(i, j, mainCoordinates, threshold) ? areaLength + 1 : areaLength;
+                }
+            }
+            
+            return areaLength;
+        }
+
+        public static bool IsInArea(int X, int Y, List<Tuple<int, int, string>> mainCoordinates, int range)
+        {
+            var sumDistances = 0;
+
+            foreach (var mainCoordinate in mainCoordinates)
+            {
+                sumDistances += GetTaxicabDistance(X, mainCoordinate.Item1, Y, mainCoordinate.Item2);
+            }
+
+            return sumDistances < range;
+        }
+
         public static string GetClosestCoordinate(Tuple<int, int> coordinate, List<Tuple<int, int, string>> mainCoordinates)
         {
             var distances = new List<Tuple<string, int>>();

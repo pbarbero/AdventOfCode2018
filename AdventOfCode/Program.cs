@@ -171,6 +171,11 @@ namespace AdventOfCode
 
             Console.WriteLine($"Result is: {result}");
             Console.ReadKey();
+
+            var result2 = Coordinator.GetSizeOfAreaClosestToAllCoordinates(lines.ToList(), 10000);
+
+            Console.WriteLine($"Result part two is: {result2}");
+            Console.ReadKey();
         }
 
         private static IEnumerable<string> ReadFile(string filePath)

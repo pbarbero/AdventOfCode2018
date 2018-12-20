@@ -30,6 +30,27 @@ namespace AdventOfCode.UnitTests
             Assert.True("1" == result);
         }
 
+        [Fact]
+        public void Test4()
+        {
+            var coordinates = BuildCoordinates();
+            Assert.True(16 == Coordinator.GetSizeOfAreaClosestToAllCoordinates(coordinates, 32));
+        }
+
+        [Fact]
+        public void Test5()
+        {
+            var mainCoordinates = BuildMainCoordinatesSecondPart();
+            Assert.True(Coordinator.IsInArea(3, 3, mainCoordinates, 32));
+        }
+
+        [Fact]
+        public void Test6()
+        {
+            var mainCoordinates = BuildMainCoordinatesSecondPart();
+            Assert.False(Coordinator.IsInArea(0, 0, mainCoordinates, 32));
+        }
+
         private List<string> BuildCoordinates()
         {
             return new List<string>()
@@ -49,6 +70,19 @@ namespace AdventOfCode.UnitTests
             {
                 new Tuple<int, int, string>(1,1, "1"),
                 new Tuple<int, int, string>(1,6, "2"),
+            };
+        }
+
+        private List<Tuple<int, int, string>> BuildMainCoordinatesSecondPart()
+        {
+            return new List<Tuple<int, int, string>>()
+            {
+                new Tuple<int, int, string>(1,1, "1"),
+                new Tuple<int, int, string>(1,6, "2"),
+                new Tuple<int, int, string>(8,3, "2"),
+                new Tuple<int, int, string>(3,4, "2"),
+                new Tuple<int, int, string>(5,5, "2"),
+                new Tuple<int, int, string>(8,9, "2"),
             };
         }
 
