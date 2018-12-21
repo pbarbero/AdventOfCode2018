@@ -8,78 +8,50 @@ namespace AdventOfCode
 {
     public static class Sleightor
     {
-        private static List<Tuple<char, char>> Steps;
+        private static List<Tuple<char, char>> Requisites;
+        private static HashSet<char> Steps;
 
         public static string GetOrderToBuildSleight(List<string> lines)
         {
-            Steps = ParseData(lines);
-            var orderedLetters = GetOrderedLetters();
+            ParseData(lines);
+            var orderedLetters = GetSteps();
             return string.Join(string.Empty, orderedLetters);
         }
 
-        public static List<char> GetOrderedLetters()
+        public static List<char> GetSteps()
         {
             var result = new List<char>();
-
-            var pendingChars = InitPendingChars(ref result, Steps[0].Item1);
-
-            while (pendingChars.Count > 0)
+            var step = Requisites[0].Item1;
+            result.Add(step);
+            
+            while (Steps.Count > 0)
             {
-                var charToAdd = GetAndRemoveFirstChar(ref pendingChars);
-                result.Add(charToAdd);
-
-                var prerequisites = GetLettersWithPrerequiste(charToAdd);
-
-                if (prerequisites.Any())
-                {
-                    AddElementsToStack(ref pendingChars, prerequisites);
-                }
+                var possibleNextSteps = GetPossibleNextSteps(step);
+                step = possibleNextSteps.Where(x => ArePrerequisitesComplete(x, result)).FirstOrDefault();
+                result.Add(step);
+                Steps.Remove(step);
             }
 
             return result;
         }
 
-        private static char GetAndRemoveFirstChar(ref List<char> pendingChars)
+        private static List<char> GetPossibleNextSteps(char c)
         {
-            var firstChar = pendingChars.First();
-            pendingChars.RemoveAt(0);
-            return firstChar;
+            return Requisites.Where(x => x.Item1 == c).Select(x => x.Item2).OrderBy(z => z).ToList();
         }
 
-        private static List<char> InitPendingChars(ref List<char> result, char initialChar)
+        private static bool ArePrerequisitesComplete(char c, List<char> result)
         {
-            var pending = new List<char>();
-            var prerrequisiteChar = initialChar;
-            result.Add(prerrequisiteChar);
-            var prerequisites = GetLettersWithPrerequiste(prerrequisiteChar);
-            AddElementsToStack(ref pending, prerequisites);
-
-            return pending;
+            var prerequisitesForChar = Requisites.Where(x => x.Item2 == c).Select(x => x.Item1);
+            return prerequisitesForChar.All(x => result.Contains(x));
         }
 
-        private static void AddElementsToStack(ref List<char> pendingChars, List<char> elements)
+        private static void ParseData(List<string> lines)
         {
-            foreach (var element in elements)
-            {
-                if (!pendingChars.Contains(element))
-                {
-                    pendingChars.Add(element);
-                }
-            }
+            Requisites = new List<Tuple<char, char>>();
+            Steps = new HashSet<char>();
 
-            pendingChars = pendingChars.OrderByDescending(c => c).ToList();
-        }
-
-        private static List<char> GetLettersWithPrerequiste(char c)
-        {
-            return Steps.Where(x => x.Item1 == c).Select(y => y.Item1).OrderByDescending(z => z).ToList();
-        }
-
-        private static List<Tuple<char,char>> ParseData(List<string> lines)
-        {
-            var data = new List<Tuple<char, char>>();
-
-            foreach(var line in lines)
+            foreach (var line in lines)
             {
                 var upperChars = line.ToList().Where(x => char.IsUpper(x)).ToArray();
                 var step = new Tuple<char, char>
@@ -87,10 +59,10 @@ namespace AdventOfCode
                     upperChars[1],
                     upperChars[2]
                 );
-                data.Add(step);
+                Requisites.Add(step);
+                Steps.Add(upperChars[1]);
+                Steps.Add(upperChars[2]);
             }
-
-            return data;
         }
     }
 }
